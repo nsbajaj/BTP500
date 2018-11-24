@@ -212,9 +212,9 @@ public:
 	virtual const LPTable& operator=(const LPTable& other); //Assignment Operator
 	virtual const LPTable& operator=(LPTable&& other); //Move Operator
 	virtual bool isEmpty() const { return false; }
-    virtual int numRecords() const;
-    void print();
-    virtual ~LPTable();
+    	virtual int numRecords() const;
+    	void print();
+    	virtual ~LPTable();
 };
 
 /*
