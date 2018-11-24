@@ -227,7 +227,7 @@ LPTable<TYPE>::LPTable(int capacity,double maxLoadFactor): Table<TYPE>(){
 	records_ = new Record*[capacity];
 	max_ = capacity;
 	size_ = 0;
-    maxLoadFactor_ = maxLoadFactor;
+    	maxLoadFactor_ = maxLoadFactor;
 	for(int i = 0; i < max_; i++){
 		records_[i] = nullptr;
 	}
