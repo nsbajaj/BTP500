@@ -320,7 +320,7 @@ size_t LPTable<TYPE>::search(const string& key){
 	if(index == max_){
             index = 0;
         }
-        //Looped around the loop and wasn't able to insert/update.
+        //Looped around the loop.
         if(index == initialIndex){
             return -1;
         }
