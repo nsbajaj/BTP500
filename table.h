@@ -211,7 +211,7 @@ public:
 	virtual bool find(const string& key, TYPE& value);
 	virtual const LPTable& operator=(const LPTable& other); //Assignment Operator
 	virtual const LPTable& operator=(LPTable&& other); //Move Operator
-	virtual bool isEmpty() const { return false; }
+	virtual bool isEmpty() const;
     	virtual int numRecords() const;
     	void print();
     	virtual ~LPTable();
@@ -227,7 +227,7 @@ LPTable<TYPE>::LPTable(int capacity,double maxLoadFactor): Table<TYPE>(){
 	records_ = new Record*[capacity];
 	max_ = capacity;
 	size_ = 0;
-    	maxLoadFactor_ = maxLoadFactor;
+    maxLoadFactor_ = maxLoadFactor;
 	for(int i = 0; i < max_; i++){
 		records_[i] = nullptr;
 	}
@@ -459,6 +459,19 @@ const LPTable<TYPE>& LPTable<TYPE>::operator=(LPTable<TYPE>&& other){
         other.records_ = tempRecords_;
     }
     return *this;
+}
+
+/*
+ This function returns true if the size of the Hash Table is 0, else false.
+ * */
+template <class TYPE>
+bool LPTable<TYPE>::isEmpty() const {
+	if(size_ == 0){
+        	return true;
+        }
+        else{
+        	return false;
+        }
 }
 
 /*
