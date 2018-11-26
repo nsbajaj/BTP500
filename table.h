@@ -204,17 +204,17 @@ private:
 
 public:
 	LPTable(int capacity,double maxLoadFactor); //Constructors
-    virtual bool update(const string& key, const TYPE& value); //Update
+    	virtual bool update(const string& key, const TYPE& value); //Update
 	virtual bool find(const string& key, TYPE& value); //Find
-    virtual bool remove(const string& key); //Remove
-    LPTable(const LPTable& other); //Copy Constructor
-    virtual const LPTable& operator=(const LPTable& other); //Assignment Operator
+    	virtual bool remove(const string& key); //Remove
+    	LPTable(const LPTable& other); //Copy Constructor
+    	virtual const LPTable& operator=(const LPTable& other); //Assignment Operator
 	LPTable(LPTable&& other); //Move Constructor
 	virtual const LPTable& operator=(LPTable&& other); //Move Operator
 	virtual bool isEmpty() const; //isEmpty
-    virtual int numRecords() const; //numRecords
-    void print(); //Print
-    virtual ~LPTable(); //Destructor
+    	virtual int numRecords() const; //numRecords
+    	void print(); //Print
+    	virtual ~LPTable(); //Destructor
 };
 
 /*
@@ -227,7 +227,7 @@ LPTable<TYPE>::LPTable(int capacity,double maxLoadFactor): Table<TYPE>(){
 	records_ = new Record*[capacity];
 	max_ = capacity;
 	size_ = 0;
-    maxLoadFactor_ = maxLoadFactor;
+    	maxLoadFactor_ = maxLoadFactor;
 	for(int i = 0; i < max_; i++){
 		records_[i] = nullptr;
 	}
