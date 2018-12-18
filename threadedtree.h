@@ -459,19 +459,11 @@ public:
                     if(curr->left_){
                         curr = curr->left_;
                     }
-                    else{
-                        curr->left_ = new Node(data);
-                        curr = nullptr;
-                    }
                 }
                 else{
                     //go right
                     if(curr->right_){
                         curr = curr->right_;
-                    }
-                    else{
-                        curr->right_ = new Node(data);
-                        curr = nullptr;
                     }
                 }
             }
