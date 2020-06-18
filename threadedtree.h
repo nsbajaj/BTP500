@@ -15,6 +15,81 @@ class ThreadedTree{
         }
     };
     Node* root_;
+
+    /*
+     findPredecessor.
+     This function is passed a value/data of a node, and it searches through the tree and returns the Predecessor to the node/value. The predecessor is the node with the highest/maximum value in left subtree of the node/data passed. If it doesn't exist, it's the parent then.
+     */
+    Node* findPredecessor(const T& data){
+        Node* predecessor = nullptr;
+        Node* curr = root_;
+        
+        while(curr != nullptr){
+            if(curr->data_ == data){
+                if(curr->left_ != nullptr){
+                    Node* temp = curr->left_;
+                    while(temp->right_ != nullptr){
+                        temp = temp->right_;
+                    }
+                    predecessor = temp;
+                }
+                break;
+            }
+            else if(curr->data_ < data){
+                predecessor = curr;
+                curr = curr->right_;
+            }
+            else if(curr->data_ > data){
+                curr = curr->left_;
+            }
+        }
+        return predecessor;
+    }
+    
+    /*
+     findSuccessor.
+     This function is passed a value/data of a node, and it searches through the tree and returns the Successor to the node/value. The successor is the node with the lowest/minimum value in right subtree of the node/data passed. If it doesn't exist, it's the parent then.
+     */
+    Node* findSuccessor(const T& data){
+        Node* successor = nullptr;
+        Node* curr = root_;
+        while (curr != nullptr){
+            if(curr->data_ == data){
+                if (curr->right_ != nullptr){
+                    Node* temp = curr->right_;
+                    while(temp->left_){
+                        temp = temp->left_;
+                    }
+                    successor = temp;
+                }
+                break;
+            }
+            else if(curr->data_ > data){
+                successor = curr;
+                curr = curr->left_;
+            }
+            else if(curr->data_ < data){
+                curr = curr->right_;
+            }
+        }
+        return successor;
+    }
+
+    /*
+     Remove.
+     This function is called recursively to delete the nodes in the tree, in post order traversal.
+     */
+    void remove(Node* curr){
+        if(curr != nullptr){
+            if(curr->leftThread_ == false){
+                remove(curr->left_);
+            }
+            if(curr->rightThread_ == false){
+                remove(curr->right_);
+            }
+            delete curr;
+        }
+    }
     
 public:
     class const_iterator{
@@ -185,7 +260,7 @@ public:
         
             //++x: prefix
             /*
-             Iterates to the previous node in the tree. If the next node is null, it iterates to the most right node in the tree (node before nullptr).
+             Iterates to the next node in the tree. If the next node is null, returns nullptr.
              */
             iterator operator++(){
                 if(this->curr_->rightThread_ == false){
@@ -382,65 +457,6 @@ public:
     }
     
     /*
-     findPredecessor.
-     This function is passed a value/data of a node, and it searches through the tree and returns the Predecessor to the node/value. The predecessor is the node with the highest/maximum value in left subtree of the node/data passed. If it doesn't exist, it's the parent then.
-     */
-    Node* findPredecessor(const T& data){
-        Node* predecessor = nullptr;
-        Node* curr = root_;
-        
-        while(curr != nullptr){
-            if(curr->data_ == data){
-                if(curr->left_ != nullptr){
-                    Node* temp = curr->left_;
-                    while(temp->right_ != nullptr){
-                        temp = temp->right_;
-                    }
-                    predecessor = temp;
-                }
-                break;
-            }
-            else if(curr->data_ < data){
-                predecessor = curr;
-                curr = curr->right_;
-            }
-            else if(curr->data_ > data){
-                curr = curr->left_;
-            }
-        }
-        return predecessor;
-    }
-    
-    /*
-     findSuccessor.
-     This function is passed a value/data of a node, and it searches through the tree and returns the Successor to the node/value. The successor is the node with the lowest/minimum value in right subtree of the node/data passed. If it doesn't exist, it's the parent then.
-     */
-    Node* findSuccessor(const T& data){
-        Node* successor = nullptr;
-        Node* curr = root_;
-        while (curr != nullptr){
-            if(curr->data_ == data){
-                if (curr->right_ != nullptr){
-                    Node* temp = curr->right_;
-                    while(temp->left_){
-                        temp = temp->left_;
-                    }
-                    successor = temp;
-                }
-                break;
-            }
-            else if(curr->data_ > data){
-                successor = curr;
-                curr = curr->left_;
-            }
-            else if(curr->data_ < data){
-                curr = curr->right_;
-            }
-        }
-        return successor;
-    }
-    
-    /*
      find.
      This function accepts a data/value, which represts the node to be found. If found, it returns an iterator which holds the node, else end()/nullptr.
      */
@@ -567,22 +583,6 @@ public:
     ~ThreadedTree(){
         remove(root_);
         root_ = nullptr;
-    }
-    
-    /*
-     Remove.
-     This function is called recursively to delete the nodes in the tree, in post order traversal.
-     */
-    void remove(Node* curr){
-        if(curr != nullptr){
-            if(curr->leftThread_ == false){
-                remove(curr->left_);
-            }
-            if(curr->rightThread_ == false){
-                remove(curr->right_);
-            }
-            delete curr;
-        }
     }
 };
 
