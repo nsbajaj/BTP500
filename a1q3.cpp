@@ -32,6 +32,6 @@ void colour(PixMap& image, const Pixel& fillColour, int x, int y, Pixel& initial
         colour(image, fillColour, x+1, y, initialColour); //Right
         colour(image, fillColour, x-1, y, initialColour); //Left
         colour(image, fillColour, x, y+1, initialColour); //Down
-        colour(image, fillColour, x, y-1, initialColour); //Left
+        colour(image, fillColour, x, y-1, initialColour); //Up
     }
 }
